@@ -1,0 +1,36 @@
+body{
+    background-color: #EDEDED;
+}
+
+.contenedor-principal{
+    margin-top: 2%;
+    max-width: 80%;
+}
+
+
+.logo{
+    width: 10%;
+}
+
+/* .datos{
+    margin-left: 5%;
+    margin-right: 5%;
+} */
+
+
+.grafica{
+   max-width: 80%; 
+}
+
+.logo{
+    background-color: #EDEDED;
+}
+
+.titulos{
+    font-size: 2em;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
