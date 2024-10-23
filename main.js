@@ -46,6 +46,9 @@ function displayTable(data) {
 
     for (let i = 1; i < Object.keys(data).length; i++) {  // Recorre cada fila (objeto en "data")
         const tr = document.createElement('tr');
+        if (i >= 35) {
+            break;
+        }
         for (let j = 0; j < data[i].length; j++) {  // Recorre cada valor en la fila (columna en "data")
             const td = document.createElement('td');
             td.textContent = data[i][j];  // Accede al valor de la fila y columna actual
@@ -75,7 +78,7 @@ function createBarChart() {
         data: {
             labels: horas,  // Etiquetas para el eje X (horas)
             datasets: [{
-                label: 'Distancia',
+                label: 'Cantidad',
                 data: distancias,  // Valores para el eje Y (distancia)
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -94,7 +97,7 @@ function createBarChart() {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Distancia (m)'  // Etiqueta para el eje Y
+                        text: 'Cantidad'  // Etiqueta para el eje Y
                     }
                 }
             }
