@@ -129,4 +129,74 @@ function createBarChart() {
             }
         }
     });
+
+    // Agregar el evento de clic al canvas para abrir la gráfica en una nueva pestaña
+    const canvas = document.getElementById('grafico');
+    canvas.style.cursor = 'pointer'; // Cambia el cursor para indicar que es clickeable
+
+    canvas.addEventListener('click', function() {
+        // Extraer los datos y opciones de la gráfica actual
+        const chartData = myChart.data;
+        const chartOptions = myChart.options;
+
+        // Serializar los datos y opciones a formato JSON
+        const chartDataStr = JSON.stringify(chartData);
+        const chartOptionsStr = JSON.stringify(chartOptions);
+
+        // Abrir una nueva ventana
+        const newWindow = window.open('', '_blank');
+
+        // Verificar si la ventana se abrió correctamente
+        if (newWindow) {
+            // Escribir el contenido HTML en la nueva ventana
+            newWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Gráfica en Nueva Pestaña</title>
+                    <!-- Incluir Chart.js desde CDN -->
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <style>
+                        body {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            margin: 0;
+                            background-color: #f5f5f5;
+                        }
+                        canvas {
+                            max-width: 90%;
+                            max-height: 90%;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <canvas id="graficoNuevo"></canvas>
+                    <script>
+                        // Parsear los datos y opciones recibidos
+                        const data = ${chartDataStr};
+                        const options = ${chartOptionsStr};
+
+                        // Obtener el contexto del canvas
+                        const ctx = document.getElementById('graficoNuevo').getContext('2d');
+
+                        // Crear la nueva gráfica
+                        new Chart(ctx, {
+                            type: data.datasets[0].type || 'bar', // Asegurarse del tipo de gráfica
+                            data: data,
+                            options: options
+                        });
+                    </script>
+                </body>
+                </html>
+            `);
+
+            // Cerrar el documento para asegurar que se renderice
+            newWindow.document.close();
+        } else {
+            alert('No se pudo abrir la nueva pestaña. Por favor, verifica que el bloqueador de ventanas emergentes esté desactivado.');
+        }
+    }, { once: true }); // Opcional: Usa { once: true } si deseas que el evento se ejecute solo una vez
 }
