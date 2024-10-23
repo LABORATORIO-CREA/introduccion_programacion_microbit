@@ -199,4 +199,5 @@ function createBarChart() {
             alert('No se pudo abrir la nueva pestaña. Por favor, verifica que el bloqueador de ventanas emergentes esté desactivado.');
         }
     }, { once: true }); // Opcional: Usa { once: true } si deseas que el evento se ejecute solo una vez
+    
 }
